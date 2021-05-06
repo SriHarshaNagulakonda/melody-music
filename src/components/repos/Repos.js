@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 import RepoItem from './RepoItem';
 
 const Repos = ({ repos }) => {
-  return repos.map(repo => <RepoItem repo={repo} key={repo.id}  />);
+  return (
+    <div style={userStyle}>
+    {repos.map((repo,index) => 
+          <RepoItem repo={repo} index={index} key={repo.id}  />
+    )}
+    </div>
+  )
+
 };
 
 Repos.propTypes = {
@@ -12,7 +19,7 @@ Repos.propTypes = {
 
 const userStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(3,1fr)',
+  gridTemplateColumns: 'repeat(4,1fr)',
   gridGap: '1rem'
 }
 

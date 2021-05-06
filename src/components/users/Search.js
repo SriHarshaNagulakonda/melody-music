@@ -1,40 +1,41 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 
-export class Search extends Component {
-    state = {
-        text: '',
-    }
+const Search = ({searchUsers, showClear, clearUsers, setAlert}) => {
 
-    onSubmit = (e) => {
+    const [text, setText] = useState("");
+    
+    const onSubmit = (e) => {
         e.preventDefault();
-        if(this.state.text === '' ){
-            this.props.setAlert('Please enter somethings','light')
+        if(text === '' ){
+            setAlert('Please enter somethings','light')
         }
         else{
-           this.props.searchUsers(this.state.text)
+           searchUsers(text)
+           setText("")
         }
     }
 
-    onChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+    const onChange = (e) => {
+        setText(e.target.value)
     }
 
-    render(){
-
-        return (
-            <div>
-                <form onSubmit={this.onSubmit} className="form">
-                    <input type="text" name="text" 
-                    value={this.state.text}
-                    onChange={this.onChange}
-                     placeholder="Search Users..." />
-                    <input type="submit"
-                        className="btn btn-dark btn-block" />
-                </form>
-                {this.props.showClear &&  <button className="btn btn-light btn-block" onClick={this.props.clearUsers} >Clear</button>}
-            </div>
-        )
-    }
+    return (
+        <div>
+            <form onSubmit={onSubmit} className="form">
+                <input type="text" name="text" 
+                value={text}
+                onChange={onChange}
+                    placeholder="Search Users..." />
+                <input type="submit"
+                    className="btn btn-dark btn-block" />
+            </form>
+            {showClear && (
+             <button className="btn btn-light btn-block" onClick={clearUsers} >Clear</button>
+                )
+            }
+        </div>
+    )
 }
+
 
 export default Search
