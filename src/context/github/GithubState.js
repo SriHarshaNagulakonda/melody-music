@@ -34,10 +34,11 @@ const GithubState = props => {
   // Search Users
   const searchUsers = async text => {
     setLoading();
-
+    console.log(text)
     const res = await axios.get(
-      `https://api.github.com/search/users?q=${text}&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+      `https://api-jio-saavn.herokuapp.com/result/?q=${text}`
     );
+    console.log(res.data)
 
     dispatch({
       type: SEARCH_USERS,
