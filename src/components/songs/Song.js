@@ -3,35 +3,36 @@ import PropTypes from 'prop-types'
 import Spinner from '../layouts/Spinner'
 import {Link} from 'react-router-dom'
 import Repos from '../repos/Repos';
-import  GithubContext  from '../../context/github/githubContext'
+import  SaavnContext  from '../../context/saavn/saavnContext'
+import ReactAudioPlayer from 'react-audio-player';
 
 
-const User = ({match}) => {
+const Song = ({match}) => {
 
-  const githubContext = useContext(GithubContext)
-  const { getUser, loading, user, getUserRepos, repos} = githubContext
+  const saavnContext = useContext(SaavnContext)
+  const { getSong, loading, song} = saavnContext
 
   useEffect(() => {
-    getUser(match.params.login)
-    getUserRepos(match.params.login)
+    getSong(match.params.songname,match.params.songid)
+    // getSongRepos(match.params.login)
   }, [])
   
 
   const {
-    name,
-    company,
-    avatar_url,
-    location,
-    bio,
-    blog,
-    login,
-    html_url,
-    followers,
-    following,
-    public_repos,
-    public_gists,
-    hireable
-  } = user;
+    songname,
+    album,
+    image,
+    year,
+    music,
+    singers,
+    starring,
+    language,
+    duration,
+    media_url,
+    album_url,
+    has_lyrics,
+    perma_link
+  } = song;
 
   return (
     <div>
@@ -39,8 +40,8 @@ const User = ({match}) => {
       {!loading && 
       <Fragment>
           <Link to='/' className="btn btn-light">Back To Search</Link>
-          Hireable: 
-          {hireable ? (
+          Latest: 
+          {year>=2015 ? (
             <i className='fas fa-check text-success' />
           ) : (
             <i className='fas fa-times-circle text-danger' />
@@ -49,45 +50,39 @@ const User = ({match}) => {
           <div className='card grid-2'>
                   <div className='all-center'>
                     <img
-                      src={avatar_url}
+                      src={image}
                       className='round-img'
                       alt=''
                       style={{ width: '150px' }}
                     />
-                    <h1>{name}</h1>
-                    <p>Location: {location}</p>
+                    <h1>{songname}</h1>
+                    <p>Album: {album}</p>
                   </div>
                   <div>
-                    {bio && (
-                      <Fragment>
-                        <h3>Bio</h3>
-                        <p>{bio}</p>
-                      </Fragment>
-                    )}
-                    <a href={html_url} className='btn btn-dark my-1'>
-                      Visit Github Profile
+                    <a href={perma_link} className='btn btn-dark my-1'>
+                      Visit Song in JIO Saavn
                     </a>
                     <ul>
                       <li>
-                        {login && (
+                        {year && (
                           <Fragment>
-                            <strong>Username: </strong> {login}
+                            <strong>Year: </strong> {year}
                           </Fragment>
                         )}
                       </li>
 
                       <li>
-                        {company && (
+                        {music && (
                           <Fragment>
-                            <strong>Company: </strong> {company}
+                            <strong>Music: </strong> {music}
                           </Fragment>
                         )}
                       </li>
 
                       <li>
-                        {blog && (
+                        {duration && (
                           <Fragment>
-                            <strong>Website: </strong> {blog}
+                            <strong>Duration: </strong> {duration}s
                           </Fragment>
                         )}
                       </li>
@@ -95,12 +90,17 @@ const User = ({match}) => {
                   </div>
                 </div>
                 <div className='card text-center'>
-                  <div className='badge badge-primary'>Followers: {followers}</div>
+                  {/* <div className='badge badge-primary'>Followers: {followers}</div>
                   <div className='badge badge-success'>Following: {following}</div>
                   <div className='badge badge-light'>Public Repos: {public_repos}</div>
-                  <div className='badge badge-dark'>Public Gists: {public_gists}</div>
+                  <div className='badge badge-dark'>Public Gists: {public_gists}</div> */}
+                  <ReactAudioPlayer
+                      src={media_url}
+                      autoPlay
+                      controls
+                    />
                 </div>
-                <Repos repos={repos} />
+                {/* <Repos repos={repos} /> */}
       </Fragment>
               
     }
@@ -109,4 +109,4 @@ const User = ({match}) => {
 }
 
 
-export default User
+export default Song

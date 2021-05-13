@@ -2,13 +2,13 @@ import './App.css';
 import React, { Component, useState } from 'react';
 import Navbar from './components/layouts/Navbar'
 import { BrowserRouter,Switch,Route } from 'react-router-dom'
-import Users from './components/users/Users'
-import User from './components/users/User'
+import Songs from './components/songs/Songs'
+import Song from './components/songs/Song'
 import axios from 'axios'
-import Search from './components/users/Search';
+import Search from './components/songs/Search';
 import Alert from './components/layouts/Alert'
 import About from './components/pages/About'
-import GithubState from './context/github/GithubState'
+import SaavnState from './context/saavn/saavnState'
 import AlertState from './context/alert/AlertState'
 import NotFound from './components/pages/NotFound'
 
@@ -16,12 +16,12 @@ import NotFound from './components/pages/NotFound'
 
 const App = () => {
 
-  const [users, setUsers] = useState([])
+  const [songs, setSongs] = useState([])
   const [loading, setLoading] = useState(false)
   const [alert, setAlert] = useState(null)
 
   return (
-    <GithubState>
+    <SaavnState>
       <AlertState>
       <BrowserRouter>
       <div className="App">
@@ -31,13 +31,13 @@ const App = () => {
           <Switch>
               <Route exact path='/' >
                 <Search  
-                showClear={users.length>0}
+                showClear={songs.length>0}
               />
-                <Users />
+                <Songs />
             </Route>
             <Route path='/about' ><About /></Route>
-            <Route path='/user/:login' render={props => (
-              <User {...props} />
+            <Route path='/song/:songname/:songid' render={props => (
+              <Song {...props} />
             )} />
             <Route component={NotFound} />
           </Switch>
@@ -46,7 +46,7 @@ const App = () => {
     </BrowserRouter>
 
       </AlertState>
-      </GithubState>
+      </SaavnState>
 
   );
 }

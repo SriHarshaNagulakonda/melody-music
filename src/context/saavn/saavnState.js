@@ -1,12 +1,12 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import GithubContext from './githubContext';
-import GithubReducer from './githubReducer';
+import GithubContext from './saavnContext';
+import GithubReducer from './saavnReducer';
 import {
-  SEARCH_USERS,
+  SEARCH_SONGS,
   SET_LOADING,
-  CLEAR_USERS,
-  GET_USER,
+  CLEAR_SONGS,
+  GET_SONG,
   GET_REPOS
 } from '../types';
 
@@ -23,49 +23,48 @@ if (process.env.NODE_ENV !== 'production') {
 
 const GithubState = props => {
   const initialState = {
-    users: [],
-    user: {},
+    songs: [],
+    song: {},
     repos: [],
     loading: false
   };
 
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
-  // Search Users
-  const searchUsers = async text => {
+  // Search Songs
+  const searchSongs = async text => {
     setLoading();
-    console.log(text)
     const res = await axios.get(
       `https://api-jio-saavn.herokuapp.com/result/?q=${text}`
+    );
+
+    dispatch({
+      type: SEARCH_SONGS,
+      payload: res.data
+    });
+  };
+
+  // Get Song
+  const getSong = async (songname,songid) => {
+    setLoading();
+    console.log(songname)
+    const res = await axios.get(
+      `https://api-jio-saavn.herokuapp.com/song/?q=https://www.jiosaavn.com/song/${songname}/${songid}`
     );
     console.log(res.data)
 
     dispatch({
-      type: SEARCH_USERS,
-      payload: res.data.items
-    });
-  };
-
-  // Get User
-  const getUser = async username => {
-    setLoading();
-
-    const res = await axios.get(
-      `https://api.github.com/users/${username}?client_id=${githubClientId}&client_secret=${githubClientSecret}`
-    );
-
-    dispatch({
-      type: GET_USER,
+      type: GET_SONG,
       payload: res.data
     });
   };
 
   // Get Repos
-  const getUserRepos = async username => {
+  const getSongRepos = async songname => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.github.com/users/${username}/repos?per_page=100&sort=created:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+      `https://api.github.com/songs/${songname}/repos?per_page=100&sort=created:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
 
     dispatch({
@@ -74,8 +73,8 @@ const GithubState = props => {
     });
   };
 
-  // Clear Users
-  const clearUsers = () => dispatch({ type: CLEAR_USERS });
+  // Clear Songs
+  const clearSongs = () => dispatch({ type: CLEAR_SONGS });
 
   // Set Loading
   const setLoading = () => dispatch({ type: SET_LOADING });
@@ -83,14 +82,14 @@ const GithubState = props => {
   return (
     <GithubContext.Provider
       value={{
-        users: state.users,
-        user: state.user,
+        songs: state.songs,
+        song: state.song,
         repos: state.repos,
         loading: state.loading,
-        searchUsers,
-        clearUsers,
-        getUser,
-        getUserRepos
+        searchSongs,
+        clearSongs,
+        getSong,
+        getSongRepos
       }}
     >
       {props.children}

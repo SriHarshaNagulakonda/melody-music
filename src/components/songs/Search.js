@@ -1,10 +1,10 @@
 import React, { Component, useState, useContext } from 'react'
-import  GithubContext  from '../../context/github/githubContext'
+import  SaavnContext  from '../../context/saavn/saavnContext'
 import  AlertContext  from '../../context/alert/alertContext'
 
 const Search = ({setAlert}) => {
 
-    const githubContext = useContext(GithubContext)
+    const saavnContext = useContext(SaavnContext)
     const alertContext = useContext(AlertContext)
     const [text, setText] = useState("");
     
@@ -14,13 +14,14 @@ const Search = ({setAlert}) => {
             alertContext.setAlert('Please enter somethings','light')
         }
         else{
-           githubContext.searchUsers(text)
-           setText("")
+           saavnContext.searchSongs(text)
+        //    setText("")
         }
     }
 
     const onChange = (e) => {
         setText(e.target.value)
+        // onSubmit(e);
     }
 
     return (
@@ -29,14 +30,14 @@ const Search = ({setAlert}) => {
                 <input type="text" name="text" 
                 value={text}
                 onChange={onChange}
-                    placeholder="Search Users..." />
+                    placeholder="Search Songs..." />
                 <input type="submit"
                     className="btn btn-dark btn-block" />
             </form>
-            {githubContext.users.length>0 && (
-             <button className="btn btn-light btn-block" onClick={githubContext.clearUsers} >Clear</button>
+            {saavnContext.songs.length>0 && (
+             <button className="btn btn-light btn-block" onClick={saavnContext.clearSongs} >Clear</button>
                 )
-            }{githubContext.users.length==0 && (
+            }{saavnContext.songs.length==0 && (
                 <h3>No Results Found</h3>
                 )
                }

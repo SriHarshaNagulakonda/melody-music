@@ -1,29 +1,29 @@
 import {
-  SEARCH_USERS,
+  SEARCH_SONGS,
   SET_LOADING,
-  CLEAR_USERS,
-  GET_USER,
+  CLEAR_SONGS,
+  GET_SONG,
   GET_REPOS
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
-    case SEARCH_USERS:
+    case SEARCH_SONGS:
       return {
         ...state,
-        users: action.payload,
+        songs: action.payload,
         loading: false
       };
-    case GET_USER:
+    case GET_SONG:
       return {
         ...state,
-        user: action.payload,
+        song: action.payload,
         loading: false
       };
-    case CLEAR_USERS:
+    case CLEAR_SONGS:
       return {
         ...state,
-        users: [],
+        songs: [],
         loading: false
       };
     case GET_REPOS: {
