@@ -1,35 +1,26 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 import GithubContext from './saavnContext';
-import GithubReducer from './saavnReducer';
+import SaavnReducer from './saavnReducer';
 import {
   SEARCH_SONGS,
   SET_LOADING,
   CLEAR_SONGS,
   GET_SONG,
-  GET_REPOS
+  GET_ALBUM_SONGS
 } from '../types';
 
-let githubClientId;
-let githubClientSecret;
-
-if (process.env.NODE_ENV !== 'production') {
-  githubClientId = process.env.REACT_APP_GITHUB_CLIENT_ID;
-  githubClientSecret = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
-} else {
-  githubClientId = process.env.GITHUB_CLIENT_ID;
-  githubClientSecret = process.env.GITHUB_CLIENT_SECRET;
-}
-
-const GithubState = props => {
+const SaavnState = props => {
   const initialState = {
     songs: [],
     song: {},
-    repos: [],
-    loading: false
+    album_songs: [],
+    loading: false,
+    album_url:""
   };
+  var album_url=""
 
-  const [state, dispatch] = useReducer(GithubReducer, initialState);
+  const [state, dispatch] = useReducer(SaavnReducer, initialState);
 
   // Search Songs
   const searchSongs = async text => {
@@ -53,6 +44,7 @@ const GithubState = props => {
     );
     console.log(res.data)
 
+
     dispatch({
       type: GET_SONG,
       payload: res.data
@@ -60,16 +52,22 @@ const GithubState = props => {
   };
 
   // Get Repos
-  const getSongRepos = async songname => {
+  const getAlbumSongs = async (songname,songid) => {
     setLoading();
 
     const res = await axios.get(
-      `https://api.github.com/songs/${songname}/repos?per_page=100&sort=created:asc&client_id=${githubClientId}&client_secret=${githubClientSecret}`
+      `https://api-jio-saavn.herokuapp.com/song/?q=https://www.jiosaavn.com/song/${songname}/${songid}`
     );
+    
+    const album_url=res.data.album_url
+    const res_albums = await axios.get(
+      `https://api-jio-saavn.herokuapp.com/album/?q=${album_url}`
+    );  
+    console.log(res_albums,'these are the fetched')
 
     dispatch({
-      type: GET_REPOS,
-      payload: res.data
+      type: GET_ALBUM_SONGS,
+      payload: res_albums.data
     });
   };
 
@@ -83,13 +81,13 @@ const GithubState = props => {
     <GithubContext.Provider
       value={{
         songs: state.songs,
-        song: state.song,
-        repos: state.repos,
+        SONG: state.song,
+        album_songs: state.album_songs,
         loading: state.loading,
         searchSongs,
         clearSongs,
         getSong,
-        getSongRepos
+        getAlbumSongs
       }}
     >
       {props.children}
@@ -97,4 +95,4 @@ const GithubState = props => {
   );
 };
 
-export default GithubState;
+export default SaavnState;

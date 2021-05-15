@@ -1,10 +1,9 @@
 import './App.css';
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/layouts/Navbar'
 import { BrowserRouter,Switch,Route } from 'react-router-dom'
 import Songs from './components/songs/Songs'
 import Song from './components/songs/Song'
-import axios from 'axios'
 import Search from './components/songs/Search';
 import Alert from './components/layouts/Alert'
 import About from './components/pages/About'
@@ -17,7 +16,6 @@ import NotFound from './components/pages/NotFound'
 const App = () => {
 
   const [songs, setSongs] = useState([])
-  const [loading, setLoading] = useState(false)
   const [alert, setAlert] = useState(null)
 
   return (

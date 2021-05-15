@@ -3,7 +3,7 @@ import {
   SET_LOADING,
   CLEAR_SONGS,
   GET_SONG,
-  GET_REPOS
+  GET_ALBUM_SONGS
 } from '../types';
 
 export default (state, action) => {
@@ -26,10 +26,10 @@ export default (state, action) => {
         songs: [],
         loading: false
       };
-    case GET_REPOS: {
+    case GET_ALBUM_SONGS: {
       return {
         ...state,
-        repos: action.payload,
+        album_songs: action.payload,
         loading: false
       };
     }

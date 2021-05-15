@@ -1,25 +1,19 @@
-import React,{Fragment, useEffect, useContext} from 'react'
+import React,{Fragment, useEffect, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import Spinner from '../layouts/Spinner'
 import {Link} from 'react-router-dom'
 import Repos from '../repos/Repos';
 import  SaavnContext  from '../../context/saavn/saavnContext'
 import ReactAudioPlayer from 'react-audio-player';
-
+import AudioPlayer from './AudioPlayer'
 
 const Song = ({match}) => {
 
   const saavnContext = useContext(SaavnContext)
-  const { getSong, loading, song} = saavnContext
-
-  useEffect(() => {
-    getSong(match.params.songname,match.params.songid)
-    // getSongRepos(match.params.login)
-  }, [])
-  
+  const { getSong, getAlbumSongs,album_songs, loading, SONG} = saavnContext
 
   const {
-    songname,
+    song,
     album,
     image,
     year,
@@ -32,7 +26,23 @@ const Song = ({match}) => {
     album_url,
     has_lyrics,
     perma_link
-  } = song;
+  } = SONG;
+
+  const { songs, title } = album_songs;
+
+  useEffect(() => {
+    getSong(match.params.songname,match.params.songid)
+    getAlbumSongs(match.params.songname,match.params.songid)
+  }, [])
+
+  const [audioLists, setAudioLists] = useState([
+    { musicSrc: media_url,name:"name" },
+    { musicSrc: media_url },
+  ])
+  
+
+
+  // setTimeout(()setAudioLists,5000)
 
   return (
     <div>
@@ -55,15 +65,22 @@ const Song = ({match}) => {
                       alt=''
                       style={{ width: '150px' }}
                     />
-                    <h1>{songname}</h1>
+                    <h1>{song}</h1>
                     <p>Album: {album}</p>
                   </div>
                   <div>
-                    <a href={perma_link} className='btn btn-dark my-1'>
+                    <a href={perma_link} className='btn btn-dark text-white'>
                       Visit Song in JIO Saavn
                     </a>
+                    <br />
                     <ul>
-                      <li>
+                    <li>
+                        {song && (
+                          <Fragment>
+                            <strong>Song Name: </strong> {song}
+                          </Fragment>
+                        )}
+                      </li>                      <li>
                         {year && (
                           <Fragment>
                             <strong>Year: </strong> {year}
@@ -94,11 +111,17 @@ const Song = ({match}) => {
                   <div className='badge badge-success'>Following: {following}</div>
                   <div className='badge badge-light'>Public Repos: {public_repos}</div>
                   <div className='badge badge-dark'>Public Gists: {public_gists}</div> */}
-                  <ReactAudioPlayer
+                  {/* {songs.length} abcd */}
+                  {title}
+                  
+
+  
+                  {/* <ReactAudioPlayer
                       src={media_url}
                       autoPlay
                       controls
-                    />
+                    /> */}
+                  <AudioPlayer songs={album_songs} />
                 </div>
                 {/* <Repos repos={repos} /> */}
       </Fragment>
