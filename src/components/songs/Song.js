@@ -28,7 +28,6 @@ const Song = ({match}) => {
     perma_link
   } = SONG;
 
-  const { songs, title } = album_songs;
 
   useEffect(() => {
     getSong(match.params.songname,match.params.songid)
@@ -112,7 +111,6 @@ const Song = ({match}) => {
                   <div className='badge badge-light'>Public Repos: {public_repos}</div>
                   <div className='badge badge-dark'>Public Gists: {public_gists}</div> */}
                   {/* {songs.length} abcd */}
-                  {title}
                   
 
   

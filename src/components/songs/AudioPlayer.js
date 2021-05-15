@@ -28,26 +28,24 @@ function AudioPlayer({songs}) {
   //   return  {musicSrc:song.media_url,name:song.song,cover:song.image}
   // }))
 
-console.log(songs.songs.map(function(obj) {
-    obj['musicSrc'] = obj['media_url']; // Assign new key
-    obj['name']=obj['song'];
-    obj['cover']=obj['image'];
-    obj['singer']=obj['music']
-    
-    return obj;
-}))
-  // setAudioLists(songs)
+
 
   return (
     <div className="App">
       {/* <h1>Reat Jinke Music Player CodeSandbox</h1> */}
       <ReactJkMusicPlayer
-        audioLists={songs.songs}
+        audioLists={songs.map(function(obj) {
+          obj['musicSrc'] = obj['media_url']; // Assign new key
+          obj['name']=obj['song'];
+          obj['cover']=obj['image'];
+          obj['singer']=obj['music']
+          return obj;
+      })}
         // audioLists={songs.songs.map(song => {
         //   return {musicSrc:song.media_url,name:song.song,cover:song.image,singer:song.music}
         // })}
         showMediaSession
-        autoPlay={false}
+        autoPlay={true}
       />
     </div>
   );
