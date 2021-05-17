@@ -30,7 +30,7 @@ const Search = ({setAlert}) => {
                 <input type="text" name="text" 
                 value={text}
                 onChange={onChange}
-                    placeholder="Search Songs..." />
+                    placeholder="Search Albums..." />
                 <input type="submit"
                     className="btn btn-dark btn-block" />
             </form>

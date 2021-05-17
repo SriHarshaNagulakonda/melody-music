@@ -35,6 +35,8 @@ export default function SongItem({song: {song, album,language,media_preview_url,
   var url=res[res.length-2]+'/'+res[res.length-1]
 
   return (
+    <Link to={"/song/"+url} size="small" color="primary" >
+
     <Card className={classes.root} >
       <CardActionArea>
         <CardMedia
@@ -61,14 +63,7 @@ export default function SongItem({song: {song, album,language,media_preview_url,
 
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          <i className="fa fa-arrow-up"></i> Listen Preview
-        </Button>
-        <Link to={"/song/"+url} size="small" color="primary" >
-          View More
-        </Link>
-      </CardActions>
     </Card>
+    </Link>
   );
 }

@@ -44,8 +44,9 @@ function AudioPlayer({songs}) {
         // audioLists={songs.songs.map(song => {
         //   return {musicSrc:song.media_url,name:song.song,cover:song.image,singer:song.music}
         // })}
-        showMediaSession
+        // showMediaSession
         autoPlay={true}
+        onAudioListsSortEnd={(songs.length,0)}
       />
     </div>
   );

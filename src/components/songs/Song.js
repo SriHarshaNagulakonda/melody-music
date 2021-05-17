@@ -10,7 +10,7 @@ import AudioPlayer from './AudioPlayer'
 const Song = ({match}) => {
 
   const saavnContext = useContext(SaavnContext)
-  const { getSong, getAlbumSongs,album_songs, loading, SONG} = saavnContext
+  const { getSong, clearSongs, getAlbumSongs,album_songs, loading, SONG} = saavnContext
 
   const {
     song,
@@ -30,6 +30,7 @@ const Song = ({match}) => {
 
 
   useEffect(() => {
+    clearSongs();
     getSong(match.params.songname,match.params.songid)
     getAlbumSongs(match.params.songname,match.params.songid)
   }, [])

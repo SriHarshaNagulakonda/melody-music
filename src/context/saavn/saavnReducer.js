@@ -23,7 +23,7 @@ export default (state, action) => {
     case CLEAR_SONGS:
       return {
         ...state,
-        songs: [],
+        album_songs: [],
         loading: false
       };
     case GET_ALBUM_SONGS: {

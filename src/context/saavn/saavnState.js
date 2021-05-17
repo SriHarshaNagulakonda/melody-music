@@ -58,16 +58,18 @@ const SaavnState = props => {
     const res = await axios.get(
       `https://api-jio-saavn.herokuapp.com/song/?q=https://www.jiosaavn.com/song/${songname}/${songid}`
     );
-
+      
     const album_url=res.data.album_url
     const res_albums = await axios.get(
       `https://api-jio-saavn.herokuapp.com/album/?q=${album_url}`
     );  
     console.log(res_albums,'these are the fetched')
 
+    res_albums.data.songs.push(res.data)
+    const final_songs = res_albums.data.songs.slice().reverse()
     dispatch({
       type: GET_ALBUM_SONGS,
-      payload: res_albums.data.songs
+      payload: final_songs
     });
   };
 
@@ -87,7 +89,8 @@ const SaavnState = props => {
         searchSongs,
         clearSongs,
         getSong,
-        getAlbumSongs
+        getAlbumSongs,
+        clearSongs
       }}
     >
       {props.children}
