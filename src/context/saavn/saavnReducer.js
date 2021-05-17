@@ -3,7 +3,8 @@ import {
   SET_LOADING,
   CLEAR_SONGS,
   GET_SONG,
-  GET_ALBUM_SONGS
+  GET_ALBUM_SONGS,
+  DEFAULT_SONGS
 } from '../types';
 
 export default (state, action) => {
@@ -14,6 +15,7 @@ export default (state, action) => {
         songs: action.payload,
         loading: false
       };
+
     case GET_SONG:
       return {
         ...state,

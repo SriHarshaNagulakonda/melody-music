@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import SongItem from './songitem'
 import Spinner from '../layouts/Spinner'
 import  SaavnContext  from '../../context/saavn/saavnContext'
-
+import { Row, Col } from 'reactstrap';
 
 function Songs() {
     const saavnContext = useContext(SaavnContext)
@@ -13,9 +13,9 @@ function Songs() {
     }
     else 
     return (
-         <div style={songStyle}>
+         <div className="row">
             {songs.map((song) => {
-                return <SongItem song={song} key={song.id} />
+                return <div className="col-md-4" style={{marginBottom:10}}><SongItem song={song} key={song.id} /></div>
             })}
         </div>
     );

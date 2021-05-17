@@ -10,7 +10,7 @@ import About from './components/pages/About'
 import SaavnState from './context/saavn/saavnState'
 import AlertState from './context/alert/AlertState'
 import NotFound from './components/pages/NotFound'
-
+import DefaultSongs from './components/songs/DefaultSongs'
 
 
 const App = () => {
@@ -32,8 +32,8 @@ const App = () => {
                 showClear={songs.length>0}
               />
                 <Songs />
+                <DefaultSongs />
             </Route>
-            <Route path='/about' ><About /></Route>
             <Route path='/song/:songname/:songid' render={props => (
               <Song {...props} />
             )} />

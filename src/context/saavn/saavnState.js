@@ -1,13 +1,13 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
-import GithubContext from './saavnContext';
+import SaavnContext from './saavnContext';
 import SaavnReducer from './saavnReducer';
 import {
   SEARCH_SONGS,
   SET_LOADING,
   CLEAR_SONGS,
   GET_SONG,
-  GET_ALBUM_SONGS
+  GET_ALBUM_SONGS,
 } from '../types';
 
 const SaavnState = props => {
@@ -80,7 +80,7 @@ const SaavnState = props => {
   const setLoading = () => dispatch({ type: SET_LOADING });
 
   return (
-    <GithubContext.Provider
+    <SaavnContext.Provider
       value={{
         songs: state.songs,
         SONG: state.song,
@@ -90,11 +90,11 @@ const SaavnState = props => {
         clearSongs,
         getSong,
         getAlbumSongs,
-        clearSongs
+        clearSongs,
       }}
     >
       {props.children}
-    </GithubContext.Provider>
+    </SaavnContext.Provider>
   );
 };
 

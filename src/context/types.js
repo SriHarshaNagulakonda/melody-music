@@ -5,3 +5,4 @@ export const GET_ALBUM_SONGS = 'GET_ALBUM_SONGS';
 export const SET_LOADING = 'SET_LOADING';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const DEFAULT_SONGS = 'DEFAULT_SONGS'
