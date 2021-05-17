@@ -6,8 +6,31 @@ import Repos from '../repos/Repos';
 import  SaavnContext  from '../../context/saavn/saavnContext'
 import ReactAudioPlayer from 'react-audio-player';
 import AudioPlayer from './AudioPlayer'
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
+});
+
+
+
 
 const Song = ({match}) => {
+
+  const classes = useStyles();
 
   const saavnContext = useContext(SaavnContext)
   const { getSong, clearSongs, getAlbumSongs,album_songs, loading, SONG} = saavnContext
@@ -57,7 +80,7 @@ const Song = ({match}) => {
             <i className='fas fa-times-circle text-danger' />
           )}   
 
-          <div className='card grid-2'>
+          <div className='card grid-3'>
                   <div className='all-center'>
                     <img
                       src={image}
@@ -66,7 +89,6 @@ const Song = ({match}) => {
                       style={{ width: '150px' }}
                     />
                     <h1>{song}</h1>
-                    <p>Album: {album}</p>
                   </div>
                   <div>
                     <a href={perma_link} className='btn btn-dark text-white'>
@@ -105,29 +127,27 @@ const Song = ({match}) => {
                       </li>
                     </ul>
                   </div>
-                </div>
-                <div className='card text-center'>
-                  {/* <div className='badge badge-primary'>Followers: {followers}</div>
-                  <div className='badge badge-success'>Following: {following}</div>
-                  <div className='badge badge-light'>Public Repos: {public_repos}</div>
-                  <div className='badge badge-dark'>Public Gists: {public_gists}</div> */}
-                  {/* {songs.length} abcd */}
-                  
+                  <div>
+                  <Card className={classes.root}>
+                    <CardActionArea>
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" style={{color:'blue'}} component="h2">
+                          {album}
+                        </Typography>
+                        <Typography variant="body2" color="text" component="p" style={{fontSize:'20px'}}>
+                          <ul type="1">
+                            {album_songs.map(song => {
+                              return <li> {song.song} </li>
+                            })}
+                          </ul>
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    </Card>
 
-  
-                  {/* <ReactAudioPlayer
-                      src={media_url}
-                      autoPlay
-                      controls
-                    /> */}
-                    <ol type="1">
-                      {album_songs.map( (song,index) => {
-                      return  <li>{song.song}</li>
-                      })}
-                    </ol>
-                  <AudioPlayer songs={album_songs} />
+                  </div>
                 </div>
-                {/* <Repos repos={repos} /> */}
+                  <AudioPlayer songs={album_songs} />
       </Fragment>
               
     }

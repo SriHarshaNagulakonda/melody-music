@@ -27,7 +27,7 @@ function AudioPlayer({songs}) {
   // setAudioLists(props.songs.map(song => {
   //   return  {musicSrc:song.media_url,name:song.song,cover:song.image}
   // }))
-
+  
 
 
   return (
@@ -39,18 +39,13 @@ function AudioPlayer({songs}) {
           obj['name']=obj['song'];
           obj['cover']=obj['image'];
           obj['singer']=obj['music']
-          obj['lyric']="text is this"
           return obj;
       })}
-        // audioLists={songs.songs.map(song => {
-        //   return {musicSrc:song.media_url,name:song.song,cover:song.image,singer:song.music}
-        // })}
-        // showMediaSession
+        showMediaSession
         autoPlay={true}
-        onAudioListsSortEnd={(songs.length,0)}
         glassBg={true}
         showLyric={true}
-        lyric="string"
+        mode="full"
       />
     </div>
   );

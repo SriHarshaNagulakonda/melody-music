@@ -38,7 +38,7 @@ const Search = ({setAlert}) => {
              <button className="btn btn-light btn-block" onClick={saavnContext.clearSongs} >Clear</button>
                 )
             }{saavnContext.songs.length==0 && (
-                <h3>No Results Found</h3>
+                <h3></h3>
                 )
                }
         </div>

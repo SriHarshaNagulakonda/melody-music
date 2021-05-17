@@ -23,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "netlify-name":"netlify init",
+    "netlify-deploy":"netlify deploy --prod"
   },
   "eslintConfig": {
     "extends": [
@@ -43,5 +45,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://apg-saavn-api.herokuapp.com/"
+  "proxy": "api-jio-saavn.herokuapp.com/"
 }
