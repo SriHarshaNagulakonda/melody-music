@@ -120,6 +120,11 @@ const Song = ({match}) => {
                       autoPlay
                       controls
                     /> */}
+                    <ol type="1">
+                      {album_songs.map( (song,index) => {
+                      return  <li>{song.song}</li>
+                      })}
+                    </ol>
                   <AudioPlayer songs={album_songs} />
                 </div>
                 {/* <Repos repos={repos} /> */}

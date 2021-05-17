@@ -31,7 +31,7 @@ const Search = ({setAlert}) => {
                 value={text}
                 onChange={onChange}
                     placeholder="Search Albums..." />
-                <input type="submit"
+                <input type="submit" value="Search"
                     className="btn btn-dark btn-block" />
             </form>
             {saavnContext.songs.length>0 && (

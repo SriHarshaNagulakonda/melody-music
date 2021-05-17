@@ -39,6 +39,7 @@ function AudioPlayer({songs}) {
           obj['name']=obj['song'];
           obj['cover']=obj['image'];
           obj['singer']=obj['music']
+          obj['lyric']="text is this"
           return obj;
       })}
         // audioLists={songs.songs.map(song => {
@@ -47,6 +48,9 @@ function AudioPlayer({songs}) {
         // showMediaSession
         autoPlay={true}
         onAudioListsSortEnd={(songs.length,0)}
+        glassBg={true}
+        showLyric={true}
+        lyric="string"
       />
     </div>
   );

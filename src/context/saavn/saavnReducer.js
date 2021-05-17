@@ -24,6 +24,7 @@ export default (state, action) => {
       return {
         ...state,
         album_songs: [],
+        songs: [],
         loading: false
       };
     case GET_ALBUM_SONGS: {
