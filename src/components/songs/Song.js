@@ -126,6 +126,10 @@ const Song = ({match}) => {
                         )}
                       </li>
                     </ul>
+                    <ReactAudioPlayer
+                      src={media_url}
+                      controls
+                    />
                   </div>
                   <div>
                   <Card className={classes.root}>
@@ -143,6 +147,7 @@ const Song = ({match}) => {
                         </Typography>
                       </CardContent>
                     </CardActionArea>
+
                     </Card>
 
                   </div>

@@ -32,6 +32,7 @@ const App = () => {
                 showClear={songs.length>0}
               />
                 <Songs />
+                <span className="bg-primary" style={{fontSize:"20"}}>Latest Telugu Songs</span>
                 <DefaultSongs />
             </Route>
             <Route path='/song/:songname/:songid' render={props => (

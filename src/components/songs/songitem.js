@@ -54,11 +54,7 @@ export default function SongItem({song: {song, album,language,media_preview_url,
           <Typography variant="body2" color="textSecondary" component="p">
             <br />
           </Typography>
-            Preview
-              <ReactAudioPlayer
-                  src={media_preview_url}
-                  controls
-                />
+
           {starring.length>0 && <><b>Starring: </b>{actors} </> }
 
         </CardContent>

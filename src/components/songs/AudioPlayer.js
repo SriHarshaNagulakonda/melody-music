@@ -44,7 +44,8 @@ function AudioPlayer({songs}) {
         showMediaSession
         autoPlay={true}
         glassBg={true}
-        showLyric={true}
+        showLyric={false}
+        showDownload={false}
         mode="full"
       />
     </div>
