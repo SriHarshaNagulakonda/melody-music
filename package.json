@@ -43,5 +43,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "api-jio-saavn.herokuapp.com/"
+  "proxy": "https://api-jio-saavn.herokuapp.com/"
 }
